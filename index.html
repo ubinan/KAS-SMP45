@@ -360,7 +360,7 @@
 
 
 /* ===================== KONFIG ===================== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBbJfRYM6FzqU8HjK9B0GPqVcQtwniB4IPagwGK-622ON4N_Obt_nmV-m1HbS3M7IM/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby3dLaI5U2gGua_MtqVQ0jBmwPJlaKSPAjfLwOFnTCRoTbhbuVCIUk10Y0k4MmEBN8/exec";
 
 /* ===================== SUBMIT ===================== */
 document.getElementById("formKasMasuk").addEventListener("submit", e => {
@@ -606,20 +606,17 @@ function loadDashboard() {
 
 /* ================= EVENT TAB ================= */
 document.addEventListener("DOMContentLoaded", () => {
-
   // load pertama kali
   loadDashboard();
+  loadRekapPembayaran();
 
   // load ulang setiap tab Dashboard diklik
-  const tabDashboard = document.querySelector(
-    '[data-bs-target="#dashboard"]'
-  );
-
+  const tabDashboard = document.querySelector('[data-bs-target="#dashboard"]');
   if (tabDashboard) {
-    document.addEventListener("DOMContentLoaded", () => {
-  loadDashboard();
-  loadRekapPembayaran();
-});
+    tabDashboard.addEventListener("shown.bs.tab", () => {
+      loadDashboard();
+      loadRekapPembayaran();
+    });
   }
 });
 
