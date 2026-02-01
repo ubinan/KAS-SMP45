@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>KAS SMP 45</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background:#f5f7fa;
+    }
+    .card-summary {
+      border-left: 5px solid #0d6efd;
+    }
+	
+	#tabelData th {
+  text-align: center;
+  white-space: nowrap;
+}
+
+#tabelData td {
+  vertical-align: middle;
+}
+
+#tabelData tbody tr:hover {
+  background-color: #f1f7ff;
+}
+
+	
+  </style>
+</head>
+<body>
+
+<div class="container my-4">
+
+  <h3 class="mb-4">📘 Sistem Kas SMP 45</h3>
+
+  <!-- NAV TAB -->
+  <ul class="nav nav-tabs" id="kasTab" role="tablist">
+    <li class="nav-item">
+      <button class="nav-link active"
+        id="dashboard-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#dashboard">
+  Dashboard
+</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#kasmasuk">Kas Masuk</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#pengeluaran">Pengeluaran</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#data">Data</button>
+    </li>
+  </ul>
+
+  <div class="tab-content pt-4">
+
+   <!-- ================= DASHBOARD ================= -->
+<div class="tab-pane fade show active" id="dashboard">
+
+  <div class="row g-4">
+
+    <!-- KAS SOSIAL -->
+    <div class="col-md-6">
+      <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white fw-bold">
+          Kas Sosial
+        </div>
+        <div class="card-body">
+          <p>Pemasukan : <strong id="sosialMasuk">Rp 0</strong></p>
+          <p>Pengeluaran : <strong id="sosialKeluar">Rp 0</strong></p>
+          <hr>
+          <p>Saldo : <strong id="sosialSaldo">Rp 0</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- KAS SERTIFIKASI -->
+    <div class="col-md-6">
+      <div class="card shadow-sm border-success">
+        <div class="card-header bg-success text-white fw-bold">
+          Kas Sertifikasi
+        </div>
+        <div class="card-body">
+          <p>Pemasukan : <strong id="sertMasuk">Rp 0</strong></p>
+          <p>Pengeluaran : <strong id="sertKeluar">Rp 0</strong></p>
+          <hr>
+          <p>Saldo : <strong id="sertSaldo">Rp 0</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- REKAP PEMBAYARAN BULANAN -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-header fw-bold">
+            Rekap Pembayaran Bulanan
+          </div>
+          <div class="card-body table-responsive">
+            <table class="table table-bordered text-center align-middle" id="tabelRekap">
+              <thead class="table-secondary">
+                <tr>
+                  <th>Nama</th>
+                  <th>Jan</th>
+                  <th>Feb</th>
+                  <th>Mar</th>
+                  <th>Apr</th>
+                  <th>Mei</th>
+                  <th>Jun</th>
+                  <th>Jul</th>
+                  <th>Ags</th>
+                  <th>Sep</th>
+                  <th>Okt</th>
+                  <th>Nov</th>
+                  <th>Des</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Data akan diisi oleh JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+    <!-- ================= KAS MASUK ================= -->
+    <div class="tab-pane fade" id="kasmasuk">
+      <form id="formKasMasuk" class="row g-3">
+
+        <div class="col-md-3">
+          <label class="form-label">Tanggal</label>
+          <input type="date" class="form-control" name="tanggal" required>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Nama</label>
+          <select class="form-select" name="nama" required>
+		  <option value="">-- pilih nama --</option>
+		  <option>Puji Sri Winarni</option>
+		  <option>Tri Murtiningsih</option>
+		  <option>Sri Sugianto</option>
+		  <option>Ari Ismiyati</option>
+		  <option>Fitriani</option>
+		  <option>Wahyu Megawati</option>
+		  <option>Lusi Mia</option>
+		  <option>Dina Syarafina</option>
+		  <option>Maslin </option>
+		  <option>Hani Santika</option>
+		  <option>Agustina</option>
+		  <option>kukuh</option>
+		  <option>Ratna</option>
+		  <option>Arifin</option>
+		  <option>Naufal </option>
+		  <option>Jundari</option>
+		  <option>Ika</option>
+		  <option>Yuli</option>
+		  <option>Dyas</option>
+		  <option>Qori</option>
+		  <option>Bayu</option>
+		  <option>Christmasco</option>
+		  <option>Kresna</option>
+		  <option>Eka</option>
+		  <option>Arwani</option>
+		  <option>Ana</option>
+			</select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Jenis Kas</label>
+          <select class="form-select" name="pembayaran" required>
+            <option value="">-- pilih --</option>
+            <option>Kas Sosial</option>
+            <option>Kas Sertifikasi</option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Bulan</label>
+          <select class="form-select" name="bulan" required>
+            <option value="">-- pilih bulan --</option>
+            <option>Januari</option>
+            <option>Februari</option>
+            <option>Maret</option>
+            <option>April</option>
+            <option>Mei</option>
+            <option>Juni</option>
+            <option>Juli</option>
+            <option>Agustus</option>
+            <option>September</option>
+            <option>Oktober</option>
+            <option>November</option>
+            <option>Desember</option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+		  <label class="form-label">Nominal</label>
+
+		  <select class="form-select mb-2" id="pilihNominal" required>
+			<option value="">-- pilih nominal --</option>
+			<option value="25000">Rp 25.000</option>
+			<option value="50000">Rp 50.000</option>
+			<option value="lain">Jumlah Lain</option>
+		  </select>
+
+  <!-- input tersembunyi -->
+  <input
+    type="number"
+    class="form-control d-none"
+    id="nominalLain"
+    placeholder="Masukkan nominal lain">
+
+  <!-- nilai yang benar-benar dikirim -->
+  <input type="hidden" name="nominal" id="nominalFinal">
+</div>
+
+        <div class="col-12">
+          <button class="btn btn-primary">Simpan Kas Masuk</button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- ================= PENGELUARAN ================= -->
+    <div class="tab-pane fade" id="pengeluaran">
+      <form id="formPengeluaran" class="row g-3">
+
+        <div class="col-md-3">
+          <label class="form-label">Tanggal</label>
+          <input type="date" class="form-control" name="tanggal" required>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Jenis Pengeluaran</label>
+          <select class="form-select" name="pengeluaran" required>
+            <option value="">-- pilih --</option>
+            <option>Sosial</option>
+            <option>Sertifikasi</option>
+            
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Keterangan</label>
+          <input type="text" class="form-control" name="keterangan">
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Nominal</label>
+          <input type="number" class="form-control" name="nominal" required>
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-danger">Simpan Pengeluaran</button>
+        </div>
+
+      </form>
+    </div>
+
+   <!-- ================= DATA ================= -->
+<div class="tab-pane fade" id="data">
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <div class="row mb-3 g-2 align-items-end">
+        <div class="col-md-3">
+          <label class="form-label">Pilih Sheet</label>
+          <select class="form-select" id="pilihSheet">
+            <option value="KasMasuk">Kas Masuk</option>
+            <option value="Pengeluaran">Pengeluaran</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label">Cari Data</label>
+          <input type="text" id="searchData" class="form-control" placeholder="Ketik untuk mencari...">
+        </div>
+
+        <div class="col-md-2">
+          <button class="btn btn-primary w-100" onclick="loadData()">
+            Tampilkan
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle" id="tabelData">
+          <thead class="table-dark"></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="text-muted small mt-2" id="infoJumlah"></div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+
+/* ===================== KONFIG ===================== */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwRXwQDmQCagqLETHC-VPDH3QCR30aVQZHxsDrHHo_HCv7m3m5g1Byxm_uzivj79dQ/exec";
+
+/* ===================== SUBMIT ===================== */
+document.getElementById("formKasMasuk").addEventListener("submit", e => {
+  e.preventDefault();
+  kirimData(e.target, "KasMasuk");
+});
+
+document.getElementById("formPengeluaran").addEventListener("submit", e => {
+  e.preventDefault();
+  kirimData(e.target, "Pengeluaran");
+});
+
+let sortTanggalAsc = false; // default DESC (terbaru di atas)
+let currentHeaders = [];
+
+
+function kirimData(form, sheet){
+  const data = Object.fromEntries(new FormData(form));
+  data.sheet = sheet;
+
+  fetch(SCRIPT_URL, {
+    method:"POST",
+    body: JSON.stringify(data)
+  })
+  .then(r=>r.json())
+  .then(res=>{
+    alert("Data berhasil disimpan");
+    form.reset();
+  })
+  .catch(err=>alert("Gagal menyimpan data"));
+}
+
+const tabel = document.getElementById("tabelData");
+const thead = tabel.querySelector("thead");
+const tbody = tabel.querySelector("tbody");
+const infoJumlah = document.getElementById("infoJumlah");
+const searchInput = document.getElementById("searchData");
+
+let cacheData = [];
+
+/* ================= LOAD DATA ================= */
+function loadData() {
+  const sheet = document.getElementById("pilihSheet").value;
+
+  fetch(`${SCRIPT_URL}?action=data&sheet=${sheet}`)
+    .then(res => res.json())
+    .then(res => {
+      if (res.status !== "success") {
+        alert("Gagal memuat data");
+        return;
+      }
+ currentHeaders = res.headers;
+ 
+ 
+      renderTable(res.headers, res.data);
+      cacheData = res.data;
+      infoJumlah.innerText = `Jumlah data: ${res.data.length}`;
+    });
+}
+
+/* ================= RENDER TABLE ================= */
+function renderTable(headers, data) {
+  thead.innerHTML = "";
+  tbody.innerHTML = "";
+
+  let trHead = document.createElement("tr");
+  headers.forEach(h => {
+    let th = document.createElement("th");
+    th.innerText = h;
+    trHead.appendChild(th);
+  });
+  thead.appendChild(trHead);
+
+  data.forEach(row => {
+    let tr = document.createElement("tr");
+
+    headers.forEach(h => {
+      let td = document.createElement("td");
+      let val = row[h] ?? "";
+
+      if (h.toLowerCase().includes("tanggal")) {
+        td.innerText = formatTanggal(val);
+        td.classList.add("text-center");
+      }
+      else if (h.toLowerCase().includes("nominal")) {
+        td.innerText = "Rp " + Number(val).toLocaleString("id-ID");
+        td.classList.add("text-end");
+      }
+      else {
+        td.innerText = val;
+      }
+
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+}
+
+
+/* ================= SEARCH ================= */
+searchInput.addEventListener("input", function () {
+  const keyword = this.value.toLowerCase();
+
+  const filtered = cacheData.filter(row =>
+    Object.values(row).join(" ").toLowerCase().includes(keyword)
+  );
+
+  const headers = Object.keys(cacheData[0] || {});
+  renderTable(headers, filtered);
+  infoJumlah.innerText = `Hasil filter: ${filtered.length}`;
+});
+
+/* AUTO LOAD PERTAMA */
+document.addEventListener("DOMContentLoaded", loadData);
+
+function formatTanggal(val) {
+  if (!val) return "";
+
+  const d = new Date(val);
+  if (isNaN(d)) return val;
+
+  return d.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+}
+/* ================= DASHBOARD ================= */
+function loadDashboard() {
+  fetch(SCRIPT_URL + "?action=dashboard")
+    .then(res => res.json())
+    .then(res => {
+      if (res.status !== "success") return;
+
+      // KAS SOSIAL
+      sosialMasuk.innerText = "Rp " + res.sosial.masuk.toLocaleString("id-ID");
+      sosialKeluar.innerText = "Rp " + res.sosial.keluar.toLocaleString("id-ID");
+      sosialSaldo.innerText = "Rp " + res.sosial.saldo.toLocaleString("id-ID");
+
+      // KAS SERTIFIKASI
+      sertMasuk.innerText = "Rp " + res.sertifikasi.masuk.toLocaleString("id-ID");
+      sertKeluar.innerText = "Rp " + res.sertifikasi.keluar.toLocaleString("id-ID");
+      sertSaldo.innerText = "Rp " + res.sertifikasi.saldo.toLocaleString("id-ID");
+    });
+}
+
+/* ================= EVENT TAB ================= */
+document.addEventListener("DOMContentLoaded", () => {
+
+  // load pertama kali
+  loadDashboard();
+
+  // load ulang setiap tab Dashboard diklik
+  const tabDashboard = document.querySelector(
+    '[data-bs-target="#dashboard"]'
+  );
+
+  if (tabDashboard) {
+    document.addEventListener("DOMContentLoaded", () => {
+  loadDashboard();
+  loadRekapPembayaran();
+});
+  }
+});
+
+const pilihNominal = document.getElementById("pilihNominal");
+const nominalLain = document.getElementById("nominalLain");
+const nominalFinal = document.getElementById("nominalFinal");
+
+pilihNominal.addEventListener("change", function () {
+  if (this.value === "lain") {
+    nominalLain.classList.remove("d-none");
+    nominalLain.required = true;
+    nominalFinal.value = "";
+  } else if (this.value) {
+    nominalLain.classList.add("d-none");
+    nominalLain.required = false;
+    nominalLain.value = "";
+    nominalFinal.value = this.value;
+  }
+});
+
+nominalLain.addEventListener("input", function () {
+  nominalFinal.value = this.value;
+});
+function loadRekapPembayaran() {
+  fetch(SCRIPT_URL + "?action=rekap")
+    .then(res => res.json())
+    .then(res => {
+      if (res.status !== "success") return;
+
+      const thead = document.querySelector("#tabelRekap thead");
+      const tbody = document.querySelector("#tabelRekap tbody");
+
+      thead.innerHTML = "";
+      tbody.innerHTML = "";
+
+      // HEADER
+      let trHead = document.createElement("tr");
+      trHead.innerHTML = "<th>Nama</th>";
+      res.bulan.forEach(b => {
+        trHead.innerHTML += `<th>${b.substring(0,3)}</th>`;
+      });
+      thead.appendChild(trHead);
+
+      // BODY
+      res.nama.forEach(nama => {
+        let tr = document.createElement("tr");
+        tr.innerHTML = `<td class="fw-bold">${nama}</td>`;
+
+        res.bulan.forEach(bulan => {
+          const sudahBayar = res.data[nama][bulan];
+          tr.innerHTML += `
+            <td>
+              ${sudahBayar ? "✅" : ""}
+            </td>`;
+        });
+
+        tbody.appendChild(tr);
+      });
+    });
+}
+tabDashboard.addEventListener("shown.bs.tab", () => {
+  loadDashboard();
+  loadRekapPembayaran();
+});
+
+
+</script>
+
+</body>
+</html>
