@@ -144,8 +144,19 @@
             Rekap Pembayaran Bulanan
           </div>
           <div class="card-body table-responsive">
+            <!-- Tambahkan dropdown filter di sini -->
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <label class="form-label">Filter Kas</label>
+                <select class="form-select" id="filterRekap">
+                  <option value="semua">Semua Kas</option>
+                  <option value="sosial">Kas Sosial</option>
+                  <option value="sertifikasi">Kas Sertifikasi</option>
+                </select>
+              </div>
+            </div>
             <table class="table table-bordered text-center align-middle" id="tabelRekap">
-              <thead class="table-secondary">
+            <thead class="table-secondary">
                 <tr>
                   <th>Nama</th>
                   <th>Jan</th>
@@ -360,7 +371,7 @@
 
 
 /* ===================== KONFIG ===================== */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby3dLaI5U2gGua_MtqVQ0jBmwPJlaKSPAjfLwOFnTCRoTbhbuVCIUk10Y0k4MmEBN8/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDPH-SKnw3dIPrUD42OGJ4_rvuo6sF_E4zb-TW2ctn_AtM2jsPR2lBzkApBIjBuvXA/exec";
 
 /* ===================== SUBMIT ===================== */
 document.getElementById("formKasMasuk").addEventListener("submit", e => {
@@ -640,8 +651,8 @@ pilihNominal.addEventListener("change", function () {
 nominalLain.addEventListener("input", function () {
   nominalFinal.value = this.value;
 });
-function loadRekapPembayaran() {
-  fetch(SCRIPT_URL + "?action=rekap")
+function loadRekapPembayaran(filter = 'semua') {
+  fetch(`${SCRIPT_URL}?action=rekap&filter=${filter}`)
     .then(res => res.json())
     .then(res => {
       if (res.status !== "success") return;
@@ -677,11 +688,28 @@ function loadRekapPembayaran() {
       });
     });
 }
-tabDashboard.addEventListener("shown.bs.tab", () => {
-  loadDashboard();
-  loadRekapPembayaran();
+
+// Tambahkan event listener untuk dropdown filter
+document.getElementById("filterRekap").addEventListener("change", function() {
+  const selectedFilter = this.value;
+  loadRekapPembayaran(selectedFilter);
 });
 
+// Modifikasi event listener tab dashboard untuk memanggil dengan filter default
+document.addEventListener("DOMContentLoaded", () => {
+  // load pertama kali
+  loadDashboard();
+  loadRekapPembayaran();  // Default: semua
+
+  // load ulang setiap tab Dashboard diklik
+  const tabDashboard = document.querySelector('[data-bs-target="#dashboard"]');
+  if (tabDashboard) {
+    tabDashboard.addEventListener("shown.bs.tab", () => {
+      loadDashboard();
+      loadRekapPembayaran();  // Reset ke default saat tab diklik
+    });
+  }
+});
 function hapusData(rowNumber) {
 
   if (!confirm("Yakin ingin menghapus data ini?")) return;
